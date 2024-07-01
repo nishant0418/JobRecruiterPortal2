@@ -20,10 +20,14 @@ function PostNewJob({ profileInfo, user, jobList }) {
   const { toast } = useToast();
 
   function handlePostNewBtnValid() {
-    return Object.keys(jobFormData).every(
-      (control) => jobFormData[control].trim() !== ""
-    );
-  }
+  return Object.keys(jobFormData).every(
+    (control) => {
+      const value = jobFormData[control];
+      return typeof value === 'string' && value.trim() !== "";
+    }
+  );
+}
+
 
   function handleAddNewJob() {
     if (!profileInfo?.isPremiumUser && jobList.length >= 2) {
